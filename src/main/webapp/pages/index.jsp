@@ -14,14 +14,17 @@
          </c:when>
          <c:otherwise>
              <h2 align="center"> Hello guys, welcome to Spring Boot JSP!</h2>
-             <a href="/auth/login">Click here to login</a>
+             <div align="center"><a align="center" href="/auth/login">Click here to login</a></div>
          </c:otherwise>
      </c:choose>
      <c:if test="${isOauth2}">
-        <h2 align="center" color="green"> This is Oauth2 authentication!!!</h2>
+        <h2 align="center" style="color: red;"> This ${user.email} is Oauth2 authentication!!!</h2>
      </c:if>
      <c:if test="${isNormal}">
-         <h2 align="center" color="gray"> This is normal user</h2>
+         <h2 align="center" style="color: gray;"> This ${user.email} is normal user</h2>
       </c:if>
+      <c:if test="${isRegistered}">
+               <h2 align="center" style="color: gray;"> User ${user.email} is Registered</h2>
+            </c:if>
 </body>
 </html>

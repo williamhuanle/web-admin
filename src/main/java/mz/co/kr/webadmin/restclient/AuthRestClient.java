@@ -18,7 +18,10 @@ public class AuthRestClient {
 
         String urlLogin = "http://localhost:8080/auth/login";
 
-        HttpEntity<SignInDto> request = new HttpEntity<>(signInDto);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<SignInDto> request = new HttpEntity<>(signInDto, headers);
         ResponseEntity<AuthDto> response = restTemplate
                 .exchange(urlLogin, HttpMethod.POST, request, AuthDto.class);
         AuthDto authDto = response.getBody();
@@ -28,8 +31,10 @@ public class AuthRestClient {
     public void signup(SignUpDto signUpDto) {
 
         String urlSignup = "http://localhost:8080/auth/signup";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<SignUpDto> request = new HttpEntity<>(signUpDto);
+        HttpEntity<SignUpDto> request = new HttpEntity<>(signUpDto, headers);
         restTemplate.exchange(urlSignup, HttpMethod.POST, request, AuthDto.class);
     }
 }

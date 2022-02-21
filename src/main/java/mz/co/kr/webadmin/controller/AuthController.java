@@ -41,8 +41,8 @@ public class AuthController {
 
     @GetMapping("/signup")
     public String signup(Model model) {
-        model.addAttribute("user", new SignInDto());
-        return "login";
+        model.addAttribute("user", new SignUpDto());
+        return "signup";
     }
 
     @PostMapping("/signup")
@@ -53,6 +53,7 @@ public class AuthController {
         //
         redirectAttributes.addFlashAttribute("user", signUpDto);
         redirectAttributes.addFlashAttribute("isLogged", false);
+        redirectAttributes.addFlashAttribute("isRegistered", true);
         return redirectView;
     }
 
