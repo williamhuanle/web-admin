@@ -2,6 +2,7 @@ package mz.co.kr.webadmin.restclient;
 
 import mz.co.kr.webadmin.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -12,9 +13,10 @@ public class UserRestClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    public UserDto getMe(String accessToken) {
+    @Value( "${restclient.auth-service.getmeUrl}")
+    private String urlGetMe;
 
-        String urlGetMe = "http://localhost:8080/user/me";
+    public UserDto getMe(String accessToken) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + accessToken);

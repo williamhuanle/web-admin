@@ -4,6 +4,7 @@ import mz.co.kr.webadmin.dto.AuthDto;
 import mz.co.kr.webadmin.dto.SignInDto;
 import mz.co.kr.webadmin.dto.SignUpDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -14,9 +15,13 @@ public class AuthRestClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    public AuthDto login(SignInDto signInDto) {
+    @Value( "${restclient.auth-service.loginUrl}")
+    private String urlLogin;
 
-        String urlLogin = "http://localhost:8080/auth/login";
+    @Value( "${restclient.auth-service.signupUrl}")
+    private String urlSignup;
+
+    public AuthDto login(SignInDto signInDto) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -30,7 +35,6 @@ public class AuthRestClient {
 
     public void signup(SignUpDto signUpDto) {
 
-        String urlSignup = "http://localhost:8080/auth/signup";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
