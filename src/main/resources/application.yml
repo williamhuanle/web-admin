@@ -3,3 +3,12 @@ spring:
     view:
       prefix: /pages/
       suffix: .jsp
+
+restclient:
+  auth-service:
+    loginUrl: http://localhost:8080/auth/login
+    signupUrl: http://localhost:8080/auth/signup
+    getmeUrl: http://localhost:8080/user/me
+  admin-service:
+    createEmployeeUrl: http://localhost:8081/employees
+    fetchAllEmployeeUrl: http://localhost:8081/employees

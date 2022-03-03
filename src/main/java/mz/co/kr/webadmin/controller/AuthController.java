@@ -4,6 +4,7 @@ import mz.co.kr.webadmin.dto.AuthDto;
 import mz.co.kr.webadmin.dto.SignInDto;
 import mz.co.kr.webadmin.dto.SignUpDto;
 import mz.co.kr.webadmin.dto.UserDto;
+import mz.co.kr.webadmin.services.EmployeeService;
 import mz.co.kr.webadmin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -36,6 +40,7 @@ public class AuthController {
         redirectAttributes.addFlashAttribute("user", signInDto);
         redirectAttributes.addFlashAttribute("isLogged", true);
         redirectAttributes.addFlashAttribute("isNormal", true);
+        redirectAttributes.addFlashAttribute("employees", employeeService.fetchAllEmployee());
         return redirectView;
     }
 
@@ -65,6 +70,7 @@ public class AuthController {
             redirectAttributes.addFlashAttribute("isLogged", true);
             redirectAttributes.addFlashAttribute("isOauth2", true);
             redirectAttributes.addFlashAttribute("user", userDto);
+            redirectAttributes.addFlashAttribute("employees", employeeService.fetchAllEmployee());
             return redirectView;
         } else {
             return new RedirectView("/login");
